@@ -129,15 +129,15 @@
 
 <div class="container" id = "allButtons">
     
-    <button onclick = "clickedButton1()" class="button" id="btn1"></button> 
-    <button onclick = "clickedButton2()" class="button" id="btn2"></button>
-    <button onclick = "clickedButton3()" class="button" id="btn3"></button>
-    <button onclick = "clickedButton4()" class="button" id="btn4"></button>
-    <button onclick = "clickedButton5()" class="button" id="btn5"></button>
-    <button onclick = "clickedButton6()" class="button" id="btn6"></button>
-    <button onclick = "clickedButton7()" class="button" id="btn7"></button>
-    <button onclick = "clickedButton8()" class="button" id="btn8"></button>
-    <button onclick = "clickedButton9()" class="button" id="btn9"></button>
+    <button onclick = "clickedButton(1)" class="button" id="btn1"></button> 
+    <button onclick = "clickedButton(2)" class="button" id="btn2"></button>
+    <button onclick = "clickedButton(3)" class="button" id="btn3"></button>
+    <button onclick = "clickedButton(4)" class="button" id="btn4"></button>
+    <button onclick = "clickedButton(5)" class="button" id="btn5"></button>
+    <button onclick = "clickedButton(6)" class="button" id="btn6"></button>
+    <button onclick = "clickedButton(7)" class="button" id="btn7"></button>
+    <button onclick = "clickedButton(8)" class="button" id="btn8"></button>
+    <button onclick = "clickedButton(9)" class="button" id="btn9"></button>
 </div>
 
 
@@ -199,45 +199,13 @@
         }
     }
 
-    function clickedButton1() {
-        var myButton = document.getElementById("btn1");
-        updateButtonStyle(myButton, 0);
-    }
-    function clickedButton2() {
-        var myButton = document.getElementById("btn2");
-        updateButtonStyle(myButton, 1);
-    }
-    function clickedButton3() {
-        var myButton = document.getElementById("btn3");
-        updateButtonStyle(myButton, 2);
-    }
-    function clickedButton4() {
-        var myButton = document.getElementById("btn4");
-        updateButtonStyle(myButton, 3);
-    }
-    function clickedButton5() {
-        var myButton = document.getElementById("btn5");
-        updateButtonStyle(myButton, 4);
-    }
-    function clickedButton6() {
-        var myButton = document.getElementById("btn6");
-        updateButtonStyle(myButton, 5);
-    }
-    function clickedButton7() {
-        var myButton = document.getElementById("btn7");
-        updateButtonStyle(myButton, 6);
-    }
-    function clickedButton8() {
-        var myButton = document.getElementById("btn8");
-        updateButtonStyle(myButton, 7);
-    }
-    function clickedButton9() {
-        var myButton = document.getElementById("btn9");
-        updateButtonStyle(myButton, 8);
+    function clickedButton(btnNum) {
+        var myButton = document.getElementById("btn" + btnNum);
+        updateButtonStyle(myButton, btnNum - 1);
     }
 
 </script>
-<script src="../tic-tac-toe.js"></script>
+<script src="../js/tic-tac-toe.js"></script>
 
 
 </body>
