@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">   
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic Tac Toe</title>
+    <style>
+        .button {
+            background-color: #8affeb;
+            /*border: solid black 3px;*/
+            transition-duration: 0.4s;
+            color: rgb(0, 0, 0);
+            width:33.3%;
+            height:33.3%;
+            
+            text-align: center;
+            vertical-align: middle;
+
+            font-size:120px;
+            cursor:pointer;
+            float:left;
+        
+         }
+
+        .button:hover {
+            background-color: #cafff2;
+        }
+      
+         .container {
+            text-align: center;
+            width:50%;
+            height:550px;
+            position:relative;
+            margin-bottom: 10px;
+            margin-left: 25%;
+         }
+         .restartContainer {
+            text-align: center;
+            width:flex;
+            height:30px;
+            display:flex;
+
+         }
+         .restartButton {
+            background-color: #c4fdec;
+            color: rgb(0, 0, 0);
+            margin: auto;
+            text-align: center;
+            vertical-align: middle;
+            font-size:20px;
+            cursor:pointer;
+            float:left;
+            border-radius: 10px;
+            padding:5px;
+            font-family:"Lucida Console", monospace;
+            
+         
+         }
+
+         .playerWon {
+            color: rgb(0, 0, 0);
+            text-align: center;
+            vertical-align: middle;
+            font-size: 50px;
+         }
+
+         #result {
+            text-align: center; 
+            color: black; 
+            font-size: xx-large; 
+            padding: 5px; 
+            font-weight: bold;
+            font-family: monospace;
+         }
+
+        .players {
+            width: 100%; 
+            height: 100px;
+            align-content: auto;
+
+
+        }
+
+        .player1 {
+            text-align: center;
+            width:20%;
+            height:30px;
+
+            color: black; 
+            font-size: xx-large; 
+            padding: 5px; 
+            font-weight: bold;
+            font-family: monospace;
+            margin-top: 2%;
+            margin-left: 10%;
+            float:left;
+         }
+
+         .player2 {
+            text-align: center;
+            width:20%;
+
+            height:30px;
+
+            color: black; 
+            font-size: xx-large; 
+            padding: 5px; 
+            font-weight: bold;
+            font-family: monospace;
+            margin-top: 2%;
+            margin-right: 10%;
+            float: right;
+         }
+/*    .button:hover {
+        background-color: #ffcaf2;
+    } */
+    
+
+    </style>
+
+</head>
+<body style = "background-color:#ffe6fb">
+<div class="players">
+    <input type="text" class = "player1" value = "Player 1" maxlength="15">
+    <input type="text" class = "player2" value = "Player 2" maxlength="15">
+</div>
+
+
+<div class="container" id = "allButtons">
+    
+    <button onclick = "clickedButton1()" class="button" id="btn1"></button> 
+    <button onclick = "clickedButton2()" class="button" id="btn2"></button>
+    <button onclick = "clickedButton3()" class="button" id="btn3"></button>
+    <button onclick = "clickedButton4()" class="button" id="btn4"></button>
+    <button onclick = "clickedButton5()" class="button" id="btn5"></button>
+    <button onclick = "clickedButton6()" class="button" id="btn6"></button>
+    <button onclick = "clickedButton7()" class="button" id="btn7"></button>
+    <button onclick = "clickedButton8()" class="button" id="btn8"></button>
+    <button onclick = "clickedButton9()" class="button" id="btn9"></button>
+</div>
+
+
+<div id="result" ></div>
+
+<div class = "restartContainer">
+    <button onclick="playAgain()" class = "restartButton">Play Again</button>
+    <!--<button onClick="window.location.reload();" class = "restartButton">Play Again</button>-->
+</div>
+
+
+<script>
+    var totalClicks = 0;
+
+    const X = 1;
+    const O = -1;
+
+    var results = [0,0,0,0,0,0,0,0,0];
+
+    function disableAllButtons() {
+        for (let i = 1; i <=9; i++) {
+            document.getElementById("btn" + i).disabled = true;
+        }
+    }
+
+    function playAgain() {
+        for (let i = 1; i <=9; i++) {
+            var btn = document.getElementById("btn" + i);
+            btn.disabled = false;
+            btn.style.backgroundColor = "#8affeb";
+            btn.innerText = "";
+            btn.style.opacity = 1;      
+        }
+
+        results = [0,0,0,0,0,0,0,0,0];
+        totalClicks = 0;
+        document.getElementById("result").textContent = "";
+    }
+
+    function updateButtonStyle(btn, btnIndex) {
+        btn.style.backgroundColor = "#cafff2";
+        btn.style.opacity = 0.6;
+
+        totalClicks = totalClicks + 1;
+        btn.innerText = (totalClicks % 2 === 0)? "X" : "O";
+        btn.disabled = true;
+
+        results[btnIndex] = (totalClicks % 2 === 0)? X : O;
+
+        if (totalClicks > 4) {
+            gameStatus = checkBoard(results);
+
+            console.log(gameStatus);
+
+            if (gameStatus["result"]) {
+                document.getElementById("result").textContent = gameStatus["result"]
+                disableAllButtons(); 
+            }
+        }
+    }
+
+    function clickedButton1() {
+        var myButton = document.getElementById("btn1");
+        updateButtonStyle(myButton, 0);
+    }
+    function clickedButton2() {
+        var myButton = document.getElementById("btn2");
+        updateButtonStyle(myButton, 1);
+    }
+    function clickedButton3() {
+        var myButton = document.getElementById("btn3");
+        updateButtonStyle(myButton, 2);
+    }
+    function clickedButton4() {
+        var myButton = document.getElementById("btn4");
+        updateButtonStyle(myButton, 3);
+    }
+    function clickedButton5() {
+        var myButton = document.getElementById("btn5");
+        updateButtonStyle(myButton, 4);
+    }
+    function clickedButton6() {
+        var myButton = document.getElementById("btn6");
+        updateButtonStyle(myButton, 5);
+    }
+    function clickedButton7() {
+        var myButton = document.getElementById("btn7");
+        updateButtonStyle(myButton, 6);
+    }
+    function clickedButton8() {
+        var myButton = document.getElementById("btn8");
+        updateButtonStyle(myButton, 7);
+    }
+    function clickedButton9() {
+        var myButton = document.getElementById("btn9");
+        updateButtonStyle(myButton, 8);
+    }
+
+</script>
+<script src="../tic-tac-toe.js"></script>
+
+
+</body>
+</html>
