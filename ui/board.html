@@ -127,20 +127,7 @@
 </div>
 
 
-<div class="container" id = "allButtons">
-    
-    <button onclick = "clickedButton(1)" class="button" id="btn1"></button> 
-    <button onclick = "clickedButton(2)" class="button" id="btn2"></button>
-    <button onclick = "clickedButton(3)" class="button" id="btn3"></button>
-    <button onclick = "clickedButton(4)" class="button" id="btn4"></button>
-    <button onclick = "clickedButton(5)" class="button" id="btn5"></button>
-    <button onclick = "clickedButton(6)" class="button" id="btn6"></button>
-    <button onclick = "clickedButton(7)" class="button" id="btn7"></button>
-    <button onclick = "clickedButton(8)" class="button" id="btn8"></button>
-    <button onclick = "clickedButton(9)" class="button" id="btn9"></button>
-</div>
-
-
+<div class="container" id = "allButtons"></div>
 <div id="result" ></div>
 
 <div class = "restartContainer">
@@ -150,6 +137,7 @@
 
 
 <script>
+
     var totalClicks = 0;
 
     const X = 1;
@@ -166,10 +154,11 @@
     function playAgain() {
         for (let i = 1; i <=9; i++) {
             var btn = document.getElementById("btn" + i);
+
             btn.disabled = false;
             btn.style.backgroundColor = "#8affeb";
             btn.innerText = "";
-            btn.style.opacity = 1;      
+            btn.style.opacity = 1; 
         }
 
         results = [0,0,0,0,0,0,0,0,0];
@@ -190,7 +179,7 @@
         if (totalClicks > 4) {
             gameStatus = checkBoard(results);
 
-            console.log(gameStatus);
+            //console.log(gameStatus);
 
             if (gameStatus["result"]) {
                 document.getElementById("result").textContent = gameStatus["result"]
@@ -199,11 +188,21 @@
         }
     }
 
-    function clickedButton(btnNum) {
-        var myButton = document.getElementById("btn" + btnNum);
-        updateButtonStyle(myButton, btnNum - 1);
+    function addButtons() {
+        var myButtonHolder = document.getElementById("allButtons");
+
+        for (let i = 1; i <= 9; i++) {
+            let btn = document.createElement("button");
+            btn.id = "btn" + i;
+            btn.className = "button";
+            btn.onclick = function() { updateButtonStyle(btn, i - 1 ); };
+            //btn.innerHTML = "";
+
+            myButtonHolder.appendChild(btn);
+        }
     }
 
+    addButtons();
 </script>
 <script src="../js/tic-tac-toe.js"></script>
 
