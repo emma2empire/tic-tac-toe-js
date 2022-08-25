@@ -1,5 +1,5 @@
 var totalClicks = 0;
-
+var isXFirst = true; 
 const X = 1;
 const O = -1;
 var results = [0,0,0,0,0,0,0,0,0];
@@ -23,6 +23,8 @@ function playAgain() {
     results = [0,0,0,0,0,0,0,0,0];
     totalClicks = 0;
     document.getElementById("result").textContent = "";
+
+    isXFirst = !isXFirst;
 }
 
 function updateButtonStyle(btn, btnIndex) {
@@ -30,11 +32,11 @@ function updateButtonStyle(btn, btnIndex) {
     btn.style.opacity = 0.6;
 
     totalClicks = totalClicks + 1;
-    btn.innerText = (totalClicks % 2 === 0)? "X" : "O";
+
+    btn.innerText = (isXFirst == (totalClicks % 2 === 0))? "X" : "O";
+    results[btnIndex] = (isXFirst == (totalClicks % 2 === 0))? X : O;
+
     btn.disabled = true;
-
-    results[btnIndex] = (totalClicks % 2 === 0)? X : O;
-
     if (totalClicks > 4) {
         gameStatus = checkBoard(results);
 
