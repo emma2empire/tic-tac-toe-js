@@ -2,6 +2,7 @@ var totalClicks = 0;
 var isXFirst = true; 
 const X = 1;
 const O = -1;
+var computerPlay = X;
 var results = [0,0,0,0,0,0,0,0,0];
 
 function disableAllButtons() {
@@ -25,6 +26,10 @@ function playAgain() {
     document.getElementById("result").textContent = "";
 
     isXFirst = !isXFirst;
+
+    if (! isXFirst) {
+        playerXPosition();
+    }
 }
 
 function updateButtonStyle(btn, btnIndex) {
@@ -41,15 +46,18 @@ function updateButtonStyle(btn, btnIndex) {
         gameStatus = checkBoard(results);
 
         //console.log(gameStatus);
-
         if (gameStatus["result"]) {
             document.getElementById("result").textContent = gameStatus["result"]
             disableAllButtons(); 
         }
     }
+
+    if (results[btnIndex] != computerPlay){
+        playerXPosition();
+    }
 }
 
-function addButtons() {
+function addButtons() { 
     var myButtonHolder = document.getElementById("allButtons");
 
     for (let i = 1; i <= 9; i++) {
@@ -64,3 +72,27 @@ function addButtons() {
 }
 
 addButtons();
+
+function playerXPosition() {
+    // X will always be computer 
+
+    // get list of available position
+    var availablePositions = []
+    for (let i = 0; i < results.length; i++) {
+        if (results[i] == 0) {
+            availablePositions.push(i + 1);
+        }
+    }
+
+    //console.log(availablePositions);
+
+    // pick a random position from it
+    if (availablePositions.length > 0) {
+        const randomIndex = Math.floor(Math.random() * availablePositions.length);
+        const randomPostion = availablePositions[randomIndex];
+
+        // play at that position
+        document.getElementById("btn" + randomPostion).click();
+    }
+    
+}
