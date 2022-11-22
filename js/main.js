@@ -3,6 +3,8 @@ var isXFirst = true;
 const X = 1;
 const O = -1;
 var computerPlay = X;
+var playerPlay = O;
+var isOnePlayer = false;
 var results = [0,0,0,0,0,0,0,0,0];
 
 function disableAllButtons() {
@@ -19,6 +21,9 @@ function playAgain() {
         btn.style.backgroundColor = "#8affeb";
         btn.innerText = "";
         btn.style.opacity = 1; 
+
+        document.getElementById("modeButton1").style.backgroundColor = "#ffa14a";
+        document.getElementById("modeButton2").style.backgroundColor = "#ffa14a";
     }
 
     results = [0,0,0,0,0,0,0,0,0];
@@ -27,7 +32,7 @@ function playAgain() {
 
     isXFirst = !isXFirst;
 
-    if (! isXFirst) {
+    if (isOnePlayer && ! isXFirst) {
         playerXPosition();
     }
 }
@@ -52,7 +57,7 @@ function updateButtonStyle(btn, btnIndex) {
         }
     }
 
-    if (results[btnIndex] != computerPlay){
+    if (isOnePlayer && results[btnIndex] == playerPlay) {
         playerXPosition();
     }
 }
@@ -94,5 +99,15 @@ function playerXPosition() {
         // play at that position
         document.getElementById("btn" + randomPostion).click();
     }
-    
+    btn.innerText = "";
+}
+
+function changePlayerMode(mode) {
+    isOnePlayer = mode;
+    if (mode == true) {
+        document.getElementById("modeButton1").style.backgroundColor = "#FBCB8D";
+    }   
+    if (mode == false) {
+        document.getElementById("modeButton2").style.backgroundColor = "#FBCB8D";
+    }
 }

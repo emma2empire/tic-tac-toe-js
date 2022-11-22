@@ -8,10 +8,14 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body style = "background-color:#ffe6fb">
+
 <div class="players">
-    <input type="text" class = "player"  ue = "Player 1" maxlength="15">
+<!--
+    <input type="text" class = "player" value = "Player 1" maxlength="15">
     <input type="text" class = "player" value = "Player 2" maxlength="15">
+-->
 </div>
+
 
 <div class="container" id = "allButtons"></div>
 <div id="result" ></div>
@@ -19,6 +23,13 @@
 <div class = "restartContainer">
     <button onclick="playAgain()" class = "restartButton">Play Again</button>
 </div>
+
+
+<div class = "playerModeContainer">
+    <button onclick="changePlayerMode(true)" class = "playerMode" id = "modeButton1">One Player</button>
+    <button onclick="changePlayerMode(false)" class = "playerMode" id = "modeButton2">Two Players</button>
+</div>
+
 
 <script src="../js/main.js"></script>
 <script src="../js/tic-tac-toe.js"></script>
